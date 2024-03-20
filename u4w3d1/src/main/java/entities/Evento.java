@@ -41,7 +41,7 @@ public class Evento {
         return null;
     }
 
-    public String getId() {
+    public Long getId() {
         return null;
     }
 }

@@ -1,4 +1,6 @@
-package entities;
+package dao;
+
+import entities.Evento;
 
 public interface EventoDAO {
     void save(Evento evento);

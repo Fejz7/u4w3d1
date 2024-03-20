@@ -1,29 +1,34 @@
 package org.example;
 
 import entities.Evento;
+import dao.EventoDAO;
+import dao.EventoDAOImpl;
 
-import java.io.PrintStream;
 import java.util.Date;
 
+
 public class Application {
-        public static <EventDAO> void main(String[] args) {
-            EventDAO eventDAO = new EventDAO();
+
+
+
+        public static void main(String[] args) {
+
+            EventoDAO eventoDAO = new EventoDAOImpl();
 
 
             Evento evento = new Evento();
             evento.setTitolo("Concerto");
             evento.setDataEvento(new Date());
             evento.setDescrizione("Concerto di musica classica");
-            Object TipoEvento = null;
-            evento.setDataEvento(TipoEvento.PUBBLICO);
+
             evento.setNumeroMassimoPartecipanti(100);
 
 
-            eventDAO.save(evento);
+            eventoDAO.save(evento);
             System.out.println("Evento salvato con successo. ID: " + evento.getId());
 
 
-            Evento eventoRecuperato = eventDAO.getById(evento.getId());
+            Evento eventoRecuperato = eventoDAO.getById(evento.getId());
             if (eventoRecuperato != null) {
                 System.out.println("Evento recuperato: " + eventoRecuperato.getTitolo());
             } else {
@@ -31,7 +36,10 @@ public class Application {
             }
 
 
-            eventDAO.delete(evento);
-            PrintStream out = System.out;
+            eventoDAO.delete(evento);
+            System.out.println("Evento eliminato.");
 
-        }}
+
+            eventoDAO.close();
+        }
+    }

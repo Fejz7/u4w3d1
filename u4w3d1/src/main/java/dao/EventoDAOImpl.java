@@ -1,4 +1,7 @@
-package entities;
+package dao;
+
+import dao.EventoDAO;
+import entities.Evento;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
