@@ -49,5 +49,5 @@ public class Location {
         this.città = città;
     }
 
-    // Other necessary methods
+
 }

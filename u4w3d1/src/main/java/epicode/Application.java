@@ -4,16 +4,13 @@ import com.github.javafaker.Faker;
 import epicode.dao.EventsDAO;
 import epicode.dao.PersonaDAO;
 import epicode.dao.PartecipazioneDAO;
-import epicode.entities.Event;
-import epicode.entities.Persona;
-import epicode.entities.Partecipazione;
-import epicode.entities.TipoEvento;
-import epicode.entities.StatoPartecipazione;
+import epicode.entities.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Locale;
 import java.util.Random;
 
@@ -28,7 +25,7 @@ public class Application {
         PartecipazioneDAO partecipazioneDAO = new PartecipazioneDAO(em);
         Random rndm = new Random();
 
-        // Aggiungere 20 eventi casuali
+
         for (int i = 0; i < 20; i++) {
             Event evento = new Event(
                     faker.chuckNorris().fact(),
@@ -40,15 +37,16 @@ public class Application {
                     rndm.nextInt(1, 1000));
             eventsDAO.save(evento);
 
-            // Aggiungere partecipanti casuali agli eventi
+
             int numPartecipanti = rndm.nextInt(1, 6);
-            for (int j = 0; j < numPartecipanti; j++) {
+            for (int j = 0; i < 20; j++) {
+                Genere genere = null;
                 Persona persona = new Persona(
                         faker.name().firstName(),
                         faker.name().lastName(),
                         faker.internet().emailAddress(),
-                        faker.date().birthday().toInstant().atZone(LocalDate.now().atStartOfDay().getZone()).toLocalDate(),
-                        faker.bool().bool() ? Genere.M : Genere.F);
+                        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                        faker.bool().bool() ? Genere.MASCHIO : Genere.FEMMINA);
                 personaDAO.save(persona);
 
                 Partecipazione partecipazione = new Partecipazione(persona, evento, StatoPartecipazione.DA_CONFERMARE);
@@ -56,7 +54,7 @@ public class Application {
             }
         }
 
-        // Esempio di utilizzo: trovare un evento per ID e stampare le sue partecipazioni
+
         Event foundEvent = eventsDAO.getById(6);
         if (foundEvent != null) {
             System.out.println("Evento trovato: " + foundEvent);
@@ -68,7 +66,7 @@ public class Application {
             System.out.println("Evento non trovato");
         }
 
-        // Chiusura dell'EntityManager
+
         em.close();
         emf.close();
     }

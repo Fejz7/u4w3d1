@@ -31,7 +31,7 @@ public class Partecipazione {
         this.stato = stato;
     }
 
-    // Getters and setters
+
     public long getId() {
         return id;
     }

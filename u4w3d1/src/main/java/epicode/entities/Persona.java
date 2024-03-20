@@ -31,7 +31,7 @@ public class Persona {
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
     private List<Partecipazione> partecipazioni = new ArrayList<>();
 
-    // Constructors
+
     public Persona() {
     }
 
@@ -43,7 +43,7 @@ public class Persona {
         this.genere = genere;
     }
 
-    // Getters and setters
+
     public long getId() {
         return id;
     }
@@ -100,7 +100,7 @@ public class Persona {
         this.partecipazioni = partecipazioni;
     }
 
-    // Other necessary methods
+
     public void addPartecipazione(Partecipazione partecipazione) {
         partecipazioni.add(partecipazione);
         partecipazione.setPersona(this);
