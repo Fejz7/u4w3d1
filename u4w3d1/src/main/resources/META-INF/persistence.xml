@@ -4,10 +4,6 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="u4w3d1">
-        <class>epicode.entities.Event</class>
-        <class>epicode.entities.Persona</class>
-        <class>epicode.entities.Partecipazione</class>
-        <class>epicode.entities.Location</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/gestioneeventi"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>

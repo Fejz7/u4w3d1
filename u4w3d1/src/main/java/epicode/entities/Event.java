@@ -2,6 +2,7 @@ package epicode.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "eventi")
@@ -17,15 +18,23 @@ public class Event {
     private TipoEvento tipoEvento;
     private int numeroMassimoPartecipanti;
 
+    @ManyToOne
+    @JoinColumn(name = "luogo_evento_id")
+    private Location luogoEvento;
+
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.REMOVE)
+    private List<Attendance> listaPartecipazioni;
+
     public Event() {
     }
 
-    public Event(String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti) {
+    public Event(String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti, Location location) {
         this.titolo = titolo;
         this.dataEvento = dataEvento;
         this.descrizione = descrizione;
         this.tipoEvento = tipoEvento;
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
+        this.luogoEvento = location;
     }
 
     public long getId() {
@@ -72,6 +81,18 @@ public class Event {
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
     }
 
+    public Location getLuogoEvento() {
+        return luogoEvento;
+    }
+
+    public void setLuogoEvento(Location luogoEvento) {
+        this.luogoEvento = luogoEvento;
+    }
+
+    public List<Attendance> getListaPartecipazioni() {
+        return listaPartecipazioni;
+    }
+
     @Override
     public String toString() {
         return "Evento{" +
@@ -81,9 +102,7 @@ public class Event {
                 ", descrizione='" + descrizione + '\'' +
                 ", tipoEvento=" + tipoEvento +
                 ", numeroMassimoPartecipanti=" + numeroMassimoPartecipanti +
+                ", location=" + luogoEvento +
                 '}';
     }
-
-    public Partecipazione[] getPartecipazioni() {
-    return getPartecipazioni();}
 }
